@@ -9,6 +9,7 @@ import Orders from "./pages/orders";
 import Navbar from "./components/navbar";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
+import Footer from "./components/footer";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="place-order" element={<PlaceOrder />} />
         <Route path="order" element={<Orders />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
