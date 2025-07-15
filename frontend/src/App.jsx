@@ -10,11 +10,13 @@ import Navbar from "./components/navbar";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import Footer from "./components/footer";
+import SearchBar from "./components/search-bar";
 
 const App = () => {
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <Navbar />
+      <SearchBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />
