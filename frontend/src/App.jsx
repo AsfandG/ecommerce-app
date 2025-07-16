@@ -11,10 +11,12 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import Footer from "./components/footer";
 import SearchBar from "./components/search-bar";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+      <Toaster />
       <Navbar />
       <SearchBar />
       <Routes>
