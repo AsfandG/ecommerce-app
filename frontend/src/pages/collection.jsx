@@ -107,7 +107,7 @@ const Collection = () => {
         </p>
         {/* Category Filter */}
         <div
-          className={`border border-gray-300 pl-5 py-3 mt-6 ${
+          className={`border border-gray-300 rounded pl-5 py-3 mt-6 ${
             showFilter ? "" : "hidden"
           } sm:block`}
         >
@@ -145,7 +145,7 @@ const Collection = () => {
 
         {/* Sub category filter  */}
         <div
-          className={`border border-gray-300 pl-5 py-3 my-5 ${
+          className={`border border-gray-300 rounded pl-5 py-3 my-5 ${
             showFilter ? "" : "hidden"
           } sm:block`}
         >
@@ -190,7 +190,7 @@ const Collection = () => {
           {/* Product sort */}
           <select
             onChange={(e) => setSortType(e.target.value)}
-            className="border-2 border-gray-300 text-sm px-2"
+            className="border border-gray-300 rounded text-sm px-2"
           >
             <option value="relavant">Sort by: Relevant</option>
             <option value="low-high">Low to High</option>
