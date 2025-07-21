@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
+import Product from "../models/product.model.js";
 
 const createProduct = async (req, res) => {
   try {
@@ -29,6 +30,22 @@ const createProduct = async (req, res) => {
         return result.secure_url;
       })
     );
+
+    const productData = {
+      name,
+      description,
+      category,
+      price: Number(price),
+      subCategory,
+      bestSeller: bestSeller === "true" ? true : false,
+      sizes: JSON.parse(sizes),
+      image: imagesUrl,
+      date: Date.now(),
+    };
+
+    const product = new Product(productData);
+    await product.save();
+    res.json({ success: true, message: "Product added!" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -37,6 +54,11 @@ const createProduct = async (req, res) => {
 
 const listProducts = async (req, res) => {
   try {
+    const [products, total] = await Promise.all([
+      Product.find({}), // Fetch documents
+      Product.countDocuments(), // Count total
+    ]);
+    res.json({ success: true, total, products });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -45,6 +67,8 @@ const listProducts = async (req, res) => {
 
 const removeProduct = async (req, res) => {
   try {
+    await Product.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: "product removed!" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -53,6 +77,17 @@ const removeProduct = async (req, res) => {
 
 const getProduct = async (req, res) => {
   try {
+    const { productId } = req.body;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.json({
+        success: false,
+        message: `no product found with id ${productId}`,
+      });
+    }
+
+    res.json({ success: true, product });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
