@@ -6,18 +6,28 @@ import List from "./pages/list";
 import Orders from "./pages/orders";
 import Dashboard from "./pages/dashboard";
 import Login from "./components/login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    localStorage.getItem("token") ? localStorage.getItem("token") : ""
+  );
+
+  useEffect(() => {
+    localStorage.setItem("token", token);
+  }, [token]);
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <Toaster />
       {token === "" ? (
-        <Login />
+        <Login setToken={setToken} />
       ) : (
         <>
-          <Navbar />
+          <Navbar setToken={setToken} />
           <hr className="border-gray-300" />
           <div className="flex w-full">
             <SideBar />
