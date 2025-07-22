@@ -1,7 +1,7 @@
 import React from "react";
 
 const Add = () => {
-  return <div>Add</div>;
+  return <div>add page</div>;
 };
 
 export default Add;
